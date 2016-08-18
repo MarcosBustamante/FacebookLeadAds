@@ -1,0 +1,73 @@
+<script>
+  // Inicializando a Aplicacao apos o SDK ser baixado
+  window.fbAsyncInit = function() {
+    FB.init({
+      appId      : '<APP_ID>',
+      xfbml      : true,
+      version    : 'v2.7'
+    });
+  };
+  
+  // Baixando o SDK
+  (function(d, s, id){
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) {return;}
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+  
+  // Funcao para pegar todas as paginas do usuario ('me/accounts')
+  function getPages() {
+    FB.api('me/accounts', function(response){
+      console.log('My pages', response);
+      renderPages(response.data);
+    });
+  }
+  
+  // Populando o select com o nome das paginas
+  function renderPages(pages) {
+    for (var i = 0; i < pages.length; ++i) {
+      var page = pages[i];
+      console.log(page.name);
+      
+      var select = document.getElementById('sel');
+      var option = document.createElement('option');
+  
+      option.text = page.name;
+      option.value = page.id;
+      option.setAttribute('access_token', page.access_token);
+  
+      select.add(option);
+      
+    }
+  }
+  
+  // Funcao para lincar a pagina com o App e fazer com que o WebHook funcione.
+  function onSubscribe() {
+    var select = document.getElementById('sel');
+    var page_id = select.value;
+  
+    console.log('Subscribe Page ' + page_id);
+    
+    var option = select.options[select.selectedIndex];
+    var page_access_token = option.getAttribute('access_token');
+    
+    // Chamada para a API (/<PAGE_ID>/subscribed_apps)
+    FB.api(
+      '/' + page_id + '/subscribed_apps', 
+      'post',
+      {
+        access_token: page_access_token
+      },
+      function(response){
+        console.log(response);
+    });
+  }
+</script>
+
+<fb:login-button scope="manage_pages" onlogin="getPages();">
+</fb:login-button>
+
+<select id='sel'></select>
+<input type='button' value='Subscribe' onclick='onSubscribe();' />
