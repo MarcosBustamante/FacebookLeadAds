@@ -6,9 +6,12 @@ Sempre que um usuário envia um lead, para que o admin da página não precise b
 
 ## Sobre o código.
 
-Criamos o código utilizando a ferramente [Hyperdev](https://hyperdev.com).
+O código foi criado no [Hyperdev](https://hyperdev.com).
 
-Para que você consiga utilizar o código sem receber nenhum erro, coloque o seu Facebook App ID no arquivo ./views/index.html no lugar da tag <APP_ID>.
+Para que você consiga utilizar o código sem receber nenhum erro, você precisa:
+ * Criar um app, ou usar um já existente.
+ * Colar a URL válida do seu site no dominio do seu App.
+ * Substituir a tag <APP_ID> pelo seu o Facebook App ID no arquivo ./views/index.html.
 
 Ex.:
 Antes:
