@@ -25,7 +25,7 @@ Feito isso, o código deve funcionar corretamente.
 # Links
 
  * Video
-    * https://www.facebook.com/groups/mktdevelopersbrasil/permalink/541893579330542/
+    * https://www.facebook.com/events/1202081796500411/permalink/1210272835681307/
 
  * Grupo para discusões de desenvolvimento
     * https://www.facebook.com/groups/mktdevelopersbrasil/
